@@ -3,7 +3,7 @@ name: Docker CI/CD pipeline
 on:
   push:
     branches:
-      -master
+      - master
 
 jobs:
   build-test-deploy:
