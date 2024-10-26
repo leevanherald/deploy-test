@@ -24,8 +24,8 @@ jobs:
 
       - name: Build and push docker image
         run: |
-          sudo docker build -t ${{ secrets.DOCKER_USERNAME }}/webapp:${{ github.sha }} .
-          sudo docker push ${{ secrets.DOCKER_USERNAME }}/webapp:${{ github.sha }}
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/webapp:${{ github.sha }} .
+          docker push ${{ secrets.DOCKER_USERNAME }}/webapp:${{ github.sha }}
 
       - name: Deploy to EC2 instance
         uses: appleboy/ssh-action@master
@@ -36,5 +36,5 @@ jobs:
           script: |
             sudo docker stop webapp || true
             sudo docker rm webapp || true
-            sudo docker pull ${{ secrets.DOCKER_USERNAME }}//webapp:${{ github.sha }}
-            sudo docker run -d --name webapp -p 80:80 ${{ secrets.DOCKER_USERNAME }}//webapp:${{ github.sha }}
+            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/webapp:${{ github.sha }}
+            sudo docker run -d --name webapp -p 80:80 ${{ secrets.DOCKER_USERNAME }}/webapp:${{ github.sha }}
